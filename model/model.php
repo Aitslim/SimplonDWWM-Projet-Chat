@@ -9,26 +9,22 @@ function findAll(): array
 
     // Coder ici
     try {
-        $requete = 'SELECT wp_posts.id as id
-                     , post_title
-                     , post_content
-                     , post_date
-                     , wp_users.display_name
-                  from wp_posts, wp_users
-                 where post_author = wp_users.id
-                   and post_type = "post"
-                   and post_status = "publish"
-                 order by post_date DESC
-                 ';
-        $req = $db->query($requete);
-        $req->setFetchMode(PDO::FETCH_ASSOC);
+        $requete = 'SELECT chat_date
+                         , chat_pseudo
+                         , chat_message
+                      FROM chat
+                 ORDER BY chat_date DESC';
 
-        $tab = $req->fetchAll();
-        $req->closeCursor();
+        $stmt = $db->query($requete);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
         $db = null;
-        return $tab;
+
+        return $result;
     } catch (PDOException $e) {
-        print "Erreur sur la requete : " . $e->getMessage() . "<br/>";
+        print "Erreur sur Select : " . $e->getMessage() . "<br/>";
         die();
     }
 }
@@ -41,6 +37,20 @@ function create(array $post): void
     $db = getDBConnection();
 
     // Coder ici
+    try {
+        $requete = "INSERT INTO chat (chat_pseudo, chat_message) VALUES (:chat_pseudo, :chat_message)";
+
+        $stmt = $db->query($requete);
+        $stmt->bindParam(':chat_pseudo', $post["chat_pseudo"], PDO::PARAM_STR);
+        $stmt->bindParam(':chat_message', $post["chat_message"], PDO::PARAM_STR);
+        $stmt->execute();
+
+        $stmt->closeCursor(); // J'ai un doute...
+        $db = null;
+    } catch (PDOException $e) {
+        print "Erreur sur Insertion : " . $e->getMessage() . "<br/>";
+        die();
+    }
 }
 
 /**
@@ -50,7 +60,7 @@ function getDBConnection(): PDO
 {
     // Coder ici
     $host = "localhost";
-    $dbname = "db_wordpress";
+    $dbname = "amazin";
     $user = "root";
     $pass = "";
 
