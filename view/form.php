@@ -1,4 +1,4 @@
-<!-- Créer ici un formulaire avec les champs pseudo et message -->
+<!-- formulaire avec les champs pseudo et message -->
 <form action="index.php" method="post">
     <fieldset>
         <div class="row">

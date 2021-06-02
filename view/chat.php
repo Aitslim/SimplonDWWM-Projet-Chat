@@ -1,8 +1,4 @@
-<?php
-
-// echo "Je suis dans chat.php" . "<br>";
-
-?>
+<!-- "Affichage liste des message -->
 
 <table class="table table-hover">
     <thead>
