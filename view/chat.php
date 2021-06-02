@@ -1,6 +1,6 @@
 <?php
 
-echo "Je suis dans chat.php" . "<br>";
+// echo "Je suis dans chat.php" . "<br>";
 
 ?>
 

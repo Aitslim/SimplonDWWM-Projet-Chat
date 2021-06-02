@@ -39,10 +39,12 @@ function create(array $post): void
     // Coder ici
     try {
         $requete = "INSERT INTO chat (chat_pseudo, chat_message) VALUES (:chat_pseudo, :chat_message)";
-
+        echo "<br>" . "Je suis dans CREATE " . "<br>";
         $stmt = $db->query($requete);
         $stmt->bindParam(':chat_pseudo', $post["chat_pseudo"], PDO::PARAM_STR);
         $stmt->bindParam(':chat_message', $post["chat_message"], PDO::PARAM_STR);
+        var_dump($post);
+        die($requete);
         $stmt->execute();
 
         $stmt->closeCursor(); // J'ai un doute...
