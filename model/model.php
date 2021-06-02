@@ -50,7 +50,6 @@ function create(array $post): void
         // insertion d'une ligne
         $stmt->execute();
 
-        // $stmt->closeCursor(); // J'ai un doute...
         $db = null;
     } catch (PDOException $e) {
         print "Erreur sur Insertion : " . $e->getMessage() . "<br/>";
