@@ -3,9 +3,6 @@
 require 'model/model.php';
 
 if (isset($_POST["chat_pseudo"]) && isset($_POST["chat_message"])) {
-    echo "<br>" . "Je suis dans Index.php " . "<br>";
-    var_dump($_POST);
-    // $messages = $_POST;
     create($_POST);
 }
 

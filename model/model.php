@@ -36,18 +36,21 @@ function create(array $post): void
 {
     $db = getDBConnection();
 
+    // $chat_pseudo = $post["chat_pseudo"];
+    // $chat_message = $post["chat_message"];
+
     // Coder ici
     try {
         $requete = "INSERT INTO chat (chat_pseudo, chat_message) VALUES (:chat_pseudo, :chat_message)";
-        echo "<br>" . "Je suis dans CREATE " . "<br>";
-        $stmt = $db->query($requete);
+
+        $stmt = $db->prepare($requete);
         $stmt->bindParam(':chat_pseudo', $post["chat_pseudo"], PDO::PARAM_STR);
         $stmt->bindParam(':chat_message', $post["chat_message"], PDO::PARAM_STR);
-        var_dump($post);
-        die($requete);
+
+        // insertion d'une ligne
         $stmt->execute();
 
-        $stmt->closeCursor(); // J'ai un doute...
+        // $stmt->closeCursor(); // J'ai un doute...
         $db = null;
     } catch (PDOException $e) {
         print "Erreur sur Insertion : " . $e->getMessage() . "<br/>";
